@@ -1,62 +1,114 @@
-# 🔖 IIIT-Knimbus Access Bookmarklet
 
-Access subscription-based academic resources through the **IIIT Kottayam Knimbus proxy**—with one click.
 
-This bookmarklet automatically rewrites URLs like IEEE, Springer, Nature, etc., to route through IIIT Kottayam's Knimbus proxy server, allowing seamless access to full-text papers if you're a student or staff of IIIT-K.
+  <h1>🔖 IIIT-Knimbus Access Bookmarklet</h1>
 
----
+  <p>
+    This bookmarklet allows you to redirect academic URLs like
+    <strong>IEEE, Springer, Nature</strong>, etc. to the <strong>IIIT Kottayam Knimbus proxy</strong>,
+    giving you full-text access via institutional login.
+  </p>
 
-## 📚 Supported Sites (Examples)
+  <h2>📌 How to Add the Bookmarklet</h2>
+  <ol>
+    <li>Select and copy the code below.</li>
+    <li>Create a new bookmark in your browser.</li>
+    <li>Paste the copied code into the <strong>URL or location field</strong>.</li>
+    <li>Name the bookmark something like <code>IIIT-Knimbus Access</code>.</li>
+  </ol>
 
-| Original URL | Redirects To |
-|--------------|--------------|
-| `https://ieeexplore.ieee.org/document/10420491` | `https://ieeexplore-ieee-org-iiitkottayam.knimbus.com/document/10420491` |
-| `https://link.springer.com/article/10.1007/s12525-025-00796-6` | `https://link-springer-com-iiitkottayam.knimbus.com/article/10.1007/s12525-025-00796-6` |
-| `https://www.nature.com/articles/s41586-024-07242-0` | `https://www-nature-com-iiitkottayam.knimbus.com/articles/s41586-024-07242-0` |
+  <h3>🔧 Bookmarklet Code (Copy This)</h3>
+  <pre><code>javascript:(function(){javascript:(function(){
+  const current = location;
+  const domainParts = current.hostname.split('.');
+  if (domainParts.length &lt; 2) {
+    alert("Invalid domain.");
+    return;
+  }
 
----
+  // Replace dots in domain with dashes, append the Knimbus suffix
+  const knimbusHost = domainParts.join('-') + '-iiitkottayam.knimbus.com';
 
-## 🔗 Add the Bookmarklet
+  // Special case for IEEE: force ieeexplore path format
+  if (current.hostname === 'ieeexplore.ieee.org') {
+    const match = current.pathname.match(/\/document\/(\d+)\//);
+    if (match) {
+      location.href = `https://${knimbusHost}/document/${match[1]}`;
+      return;
+    }
+  }
 
-**Drag the link below to your bookmarks bar:**
+  // Generic case: preserve full path, query, and hash
+  const newUrl = `https://${knimbusHost}${current.pathname}${current.search}${current.hash}`;
+  location.href = newUrl;
+})()})();</code></pre>
 
-[🔓 IIIT-Knimbus Access](javascript:(function(){const%20current=location;const%20domainParts=current.hostname.split('.');if(domainParts.length<2){alert('Invalid%20domain.');return;}const%20knimbusHost=domainParts.join('-')+'-iiitkottayam.knimbus.com';if(current.hostname==='ieeexplore.ieee.org'){const%20match=current.pathname.match(/\\/document\\/(\\d+)/);if(match){location.href=`https://${knimbusHost}/document/${match[1]}`;return;}}const%20newUrl=`https://${knimbusHost}${current.pathname}${current.search}${current.hash}`;location.href=newUrl;})())
+  <h3>💡 Or Use This Pre-Encoded Link</h3>
+  <p>
+    You can also copy and paste this version directly into your bookmark URL field:
+  </p>
+  <pre><code>javascript:(function()%7Bjavascript%3A(function()%7B%0A%20%20const%20current%20%3D%20location%3B%0A%20%20const%20domainParts%20%3D%20current.hostname.split('.')%3B%0A%20%20if%20(domainParts.length%20%3C%202)%20%7B%0A%20%20%20%20alert(%22Invalid%20domain.%22)%3B%0A%20%20%20%20return%3B%0A%20%20%7D%0A%0A%20%20const%20knimbusHost%20%3D%20domainParts.join('-')%20%2B%20'-iiitkottayam.knimbus.com'%3B%0A%0A%20%20if%20(current.hostname%20%3D%3D%3D%20'ieeexplore.ieee.org')%20%7B%0A%20%20%20%20const%20match%20%3D%20current.pathname.match(%2F%5C%2Fdocument%5C%2F(%5Cd%2B)%5C%2F%2F)%3B%0A%20%20%20%20if%20(match)%20%7B%0A%20%20%20%20%20%20location.href%20%3D%20%60https%3A%2F%2F%24%7BknimbusHost%7D%2Fdocument%2F%24%7Bmatch%5B1%5D%7D%60%3B%0A%20%20%20%20%20%20return%3B%0A%20%20%20%20%7D%0A%20%20%7D%0A%0A%20%20const%20newUrl%20%3D%20%60https%3A%2F%2F%24%7BknimbusHost%7D%24%7Bcurrent.pathname%7D%24%7Bcurrent.search%7D%24%7Bcurrent.hash%7D%60%3B%0A%20%20location.href%20%3D%20newUrl%3B%0A%7D)()%3B%7D)()%3B</code></pre>
 
-> 🧠 Tip: If the link doesn't drag properly, right-click → Bookmark this link
+  <h2>✅ Examples</h2>
+  <ul>
+    <li><code>https://ieeexplore.ieee.org/document/10420491</code> → <code>https://ieeexplore-ieee-org-iiitkottayam.knimbus.com/document/10420491</code></li>
+    <li><code>https://link.springer.com/article/10.1007/s12525-025-00796-6</code> → <code>https://link-springer-com-iiitkottayam.knimbus.com/article/10.1007/s12525-025-00796-6</code></li>
+  </ul>
 
----
+  <h2>⚠️ Notes</h2>
+  <ul>
+    <li>You must be on IIIT-K campus or connected via VPN for access.</li>
+    <li>Only works with domains supported by Knimbus for IIIT Kottayam.</li>
+  </ul>
 
-## 🛠 What It Does
+  <h2>📄 License</h2>
+  <p>MIT License – Free to use and share with your peers.</p>
 
-- ✨ **Automatically rewrites** domains like `ieeexplore.ieee.org` to their Knimbus counterparts (e.g., `ieeexplore-ieee-org-iiitkottayam.knimbus.com`)
-- 💾 **Preserves paths, query params, and hashes** – so you'll stay on the same document, article, or page
-- 📖 **Optimized for academic resources** used by IIIT-K students and staff
+</body>
+</html>
 
----
 
-## 📌 How to Use
+<h2>🚀 Use an Online Bookmarklet Maker</h2>
 
-1. Go to any academic page (e.g., IEEE, Springer, Nature).
-2. Click the **bookmarklet** from your bookmarks bar.
-3. You'll be redirected to the Knimbus proxy version of the same resource.
-4. If you're within IIIT-K network or logged into the proxy, you'll get full access.
+<p>
+Instead of manually encoding and copying JavaScript code, use this handy online tool to generate the bookmarklet link:
+</p>
 
----
+<p>
+  👉 <a href="https://caiorss.github.io/bookmarklet-maker/" target="_blank" rel="noopener noreferrer">
+    Bookmarklet Maker – by Caiorss
+  </a>
+</p>
 
-## ❗ Notes
+<p>Here’s what to do:</p>
+<ol>
+  <li>Open the site above.</li>
+  <li>Paste the JavaScript code below into the editor box.</li>
+  <li>It will generate a clickable link.</li>
+  <li>Right-click → Bookmark it (or drag to your bookmarks bar).</li>
+</ol>
 
-- Requires access through IIIT Kottayam’s proxy (e.g., logged in via VPN or campus network).
-- If a page doesn’t work, make sure the original domain is supported by Knimbus and properly mapped.
+<h3>📋 JavaScript Code to Paste</h3>
+<pre><code>(function(){
+  const current = location;
+  const domainParts = current.hostname.split('.');
+  if (domainParts.length < 2) {
+    alert("Invalid domain.");
+    return;
+  }
 
----
+  // Replace dots in domain with dashes, append the Knimbus suffix
+  const knimbusHost = domainParts.join('-') + '-iiitkottayam.knimbus.com';
 
-## 💡 Want More?
+  // Special case for IEEE
+  if (current.hostname === 'ieeexplore.ieee.org') {
+    const match = current.pathname.match(/\/document\/(\d+)\//);
+    if (match) {
+      location.href = `https://${knimbusHost}/document/${match[1]}`;
+      return;
+    }
+  }
 
-- Add support for more domains? Open a PR or issue!
-- Want a browser extension? We can build a version that automatically redirects on page load.
-
----
-
-## 📄 License
-
-MIT License
+  // Generic case
+  const newUrl = `https://${knimbusHost}${current.pathname}${current.search}${current.hash}`;
+  location.href = newUrl;
+})();</code></pre>
