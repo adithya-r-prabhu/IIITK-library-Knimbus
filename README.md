@@ -50,8 +50,8 @@
 
   <h2>✅ Examples</h2>
   <ul>
-    <li><code>https://ieeexplore.ieee.org/document/10420491</code> → <code>https://ieeexplore-ieee-org-iiitkottayam.knimbus.com/document/10420491</code></li>
-    <li><code>https://link.springer.com/article/10.1007/s12525-025-00796-6</code> → <code>https://link-springer-com-iiitkottayam.knimbus.com/article/10.1007/s12525-025-00796-6</code></li>
+    <li><code>https://ieeexplore.ieee.org/document/xxxxx</code> → <code>https://ieeexplore-ieee-org-iiitkottayam.knimbus.com/document/xxxxx</code></li>
+    <li><code>https://link.springer.com/article/yyyy/xxxxx</code> → <code>https://link-springer-com-iiitkottayam.knimbus.com/article/yyyy/xxxxx</code></li>
   </ul>
 
   <h2>⚠️ Notes</h2>
